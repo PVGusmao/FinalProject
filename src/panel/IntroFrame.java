@@ -18,9 +18,9 @@ public class IntroFrame {
 	protected static final String Enumerate = null;
 	private JFrame introFrame;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JRadioButton mark1;
-	private JRadioButton mark2;
-	private JRadioButton mark3;
+	public JRadioButton mark1;
+	public JRadioButton mark2;
+	public JRadioButton mark3;
 	private JLabel lblimageVertical;
 
 	/**
@@ -74,14 +74,17 @@ public class IntroFrame {
 		btnAceitar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(mark1.isSelected()) {
+					StaticVariable.markConfig = 1;
 					HorizontalConfiguration.horizontalFrame();
 					introFrame.setVisible(false);
 					
 				} else if(mark2.isSelected()) {
+					StaticVariable.markConfig = 2;
 					DeltaConfiguration.deltaFrame();
 					introFrame.setVisible(false);
 					
 				} else if(mark3.isSelected()) {
+					StaticVariable.markConfig = 3;
 					VerticalConfiguration.verticalFrame();
 					introFrame.setVisible(false);	
 					
