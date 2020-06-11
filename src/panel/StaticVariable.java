@@ -21,4 +21,5 @@ public class StaticVariable {
 	public static int pontos = 0;
 	public static int markSub = 0;
 	public static int markConfig = 0;
+	public static int numCont = 0;
 }

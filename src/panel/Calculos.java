@@ -749,7 +749,18 @@ public class Calculos {
     	
     	return value;
     }
-    
+
+	 public void wait(int ms){
+	        try
+	        {
+	            Thread.sleep(ms);
+	        }
+	        catch(InterruptedException ex)
+	        {
+	            Thread.currentThread().interrupt();
+	        }
+	    }
+	 
 	 public double epsilon = 18 * Math.pow(10, 9);
 
 }

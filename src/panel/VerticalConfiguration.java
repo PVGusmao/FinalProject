@@ -1,9 +1,12 @@
 package panel;
 
 import java.awt.Font;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.EventQueue;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -88,21 +91,6 @@ public class VerticalConfiguration extends JFrame {
 		});
 	}
 	
-	public static void main(String Args) {
-		
-		 try {
-	            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-	                if ("Nimbus".equals(info.getName())) {
-	                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-	                    break;
-	                }
-	            }
-	        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-	        }
-		verticalFrame();
-		
-	}
-
 	/**
 	 * Create the application.
 	 */
@@ -122,6 +110,11 @@ public class VerticalConfiguration extends JFrame {
 		verticalFrame.setBounds(100, 100, 781, 650);
 		verticalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		verticalFrame.getContentPane().setLayout(null);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		Point middle = new Point(2*screenSize.width / 3, screenSize.height / 2);
+		Point newLocation = new Point(middle.x - (verticalFrame.getWidth() / 2), 
+		                              middle.y - (verticalFrame.getHeight() / 2));
+		verticalFrame.setLocation(newLocation);
 		
 		JLabel labelAltura = new JLabel("Altura fase-solo em metros");
 		labelAltura.setFont(new Font("Times New Roman", Font.PLAIN, 14));
@@ -232,6 +225,7 @@ public class VerticalConfiguration extends JFrame {
 						 || textFieldBtoP.getText().length() == 0 || textFieldCtoP.getText().length() == 0 || textFieldxP1.getText().length() == 0 || textFieldyP1.getText().length() == 0 
 						 || textFieldxP2.getText().length() == 0 || textFieldyP2.getText().length() == 0 || textFieldRaioParaRaio.getText().length() == 0 || buttonGroup.isSelected(null)){
 					JOptionPane.showMessageDialog(null, "Formulário necessita estar preenchido");
+					
 				}else {
 				
 				double h = Double.parseDouble(textFieldAltura.getText());
@@ -479,6 +473,9 @@ public class VerticalConfiguration extends JFrame {
 		btnCarregar = new JButton("Carregar");
 		btnCarregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				try { 
+				
 				JFileChooser chooser = new JFileChooser();
 				chooser.showOpenDialog(null);
 				File f = chooser.getSelectedFile();
@@ -527,8 +524,9 @@ public class VerticalConfiguration extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			}
-		});
+			} catch(Exception e1) {}	
+		}
+	});
 		btnCarregar.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		btnCarregar.setBounds(471, 533, 134, 21);
 		verticalFrame.getContentPane().add(btnCarregar);
@@ -598,6 +596,8 @@ public class VerticalConfiguration extends JFrame {
 					mark = 5;
 				}
 				
+				try {
+					
 				StaticVariable.markSub = mark;
 				StaticVariable.h = Double.parseDouble(textFieldAltura.getText());
 				StaticVariable.s = Double.parseDouble(textFieldEspaçamento.getText());
@@ -616,6 +616,8 @@ public class VerticalConfiguration extends JFrame {
 				StaticVariable.rpr = Double.parseDouble(textFieldRaioParaRaio.getText());
 				
 				dg.setVisible(true);
+				
+				} catch(Exception e1) {}	
 			}
 		});
 		btnGrafico.setFont(new Font("Times New Roman", Font.BOLD, 14));

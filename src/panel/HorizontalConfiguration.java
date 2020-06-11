@@ -18,8 +18,11 @@ import java.io.FileWriter;
 import java.util.Scanner;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -77,21 +80,6 @@ public class HorizontalConfiguration extends JFrame {
 		});
 	}
 	
-	public static void main(String Args) {
-		
-		 try {
-	            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-	                if ("Nimbus".equals(info.getName())) {
-	                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-	                    break;
-	                }
-	            }
-	        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-	        }
-		
-		horizontalFrame();
-	}
-
 	/**
 	 * Create the application.
 	 */
@@ -110,6 +98,11 @@ public class HorizontalConfiguration extends JFrame {
 		horizontalFrame.setBounds(100, 100, 778, 650);
 		horizontalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		horizontalFrame.getContentPane().setLayout(null);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		Point middle = new Point(screenSize.width / 3, screenSize.height / 2);
+		Point newLocation = new Point(middle.x - (horizontalFrame.getWidth() / 2), 
+		                              middle.y - (horizontalFrame.getHeight() / 2));
+		horizontalFrame.setLocation(newLocation);
 		
 		JLabel labelAltura = new JLabel("Altura fase-solo em metros");
 		labelAltura.setFont(new Font("Times New Roman", Font.PLAIN, 14));
@@ -221,7 +214,7 @@ public class HorizontalConfiguration extends JFrame {
 						 || textFieldxP2.getText().length() == 0 || textFieldyP2.getText().length() == 0 || textFieldRaioParaRaio.getText().length() == 0 ||buttonGroup.isSelected(null)){
 					JOptionPane.showMessageDialog(null, "Formulário necessita estar preenchido");
 				}
-				
+				try {
 				double h = Double.parseDouble(textFieldAltura.getText());
 				double s = Double.parseDouble(textFieldEspaçamento.getText());
 				double t = Double.parseDouble(textFieldRazao.getText());
@@ -305,9 +298,8 @@ public class HorizontalConfiguration extends JFrame {
 		            String angle = String.valueOf(polarValue[1]);
 		            String number = module + " Newtons/Coulombs" + "\n" + angle + " graus";
 		            JOptionPane.showMessageDialog(null, number);
-				}
-			
-				
+					}
+				} catch(Exception e1) {};
 			}	
 		});
 		btnCalculate.setFont(new Font("Times New Roman", Font.BOLD, 14));
@@ -472,7 +464,7 @@ public class HorizontalConfiguration extends JFrame {
 				JFileChooser chooser = new JFileChooser();
 				chooser.showOpenDialog(null);
 				File f = chooser.getSelectedFile();
-				String fileName = f.getAbsolutePath();
+				try{String fileName = f.getAbsolutePath();
 				textFieldAltura.setText("");
 				textFieldEspaçamento.setText("");
 				textFieldRaio.setText("");
@@ -518,8 +510,9 @@ public class HorizontalConfiguration extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			}
-		});
+			} catch(Exception e1) {};
+		}
+	});
 		btnCarregar.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		btnCarregar.setBounds(454, 530, 134, 21);
 		horizontalFrame.getContentPane().add(btnCarregar);
@@ -589,6 +582,7 @@ public class HorizontalConfiguration extends JFrame {
 					mark = 5;
 				}
 				
+				try {
 				StaticVariable.markSub = mark;
 				StaticVariable.h = Double.parseDouble(textFieldAltura.getText());
 				StaticVariable.s = Double.parseDouble(textFieldEspaçamento.getText());
@@ -607,7 +601,7 @@ public class HorizontalConfiguration extends JFrame {
 				StaticVariable.rpr = Double.parseDouble(textFieldRaioParaRaio.getText());
 				
 				dg.setVisible(true);
-				
+				} catch(Exception e1) {};
 			}
 		});
 		

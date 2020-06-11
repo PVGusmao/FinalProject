@@ -2,6 +2,7 @@ package panel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Color;
 import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -12,6 +13,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.ButtonGroup;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class IntroFrame {
 
@@ -39,20 +42,6 @@ public class IntroFrame {
 		});
 	}
 	
-	public static void main(String[] args) {
-		
-		try {
-	            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-	                if ("Nimbus".equals(info.getName())) {
-	                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-	                    break;
-	                }
-	            }
-	        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-	        }
-		introFrame();
-	}
-
 	/**
 	 * Create the application.
 	 */
@@ -68,8 +57,16 @@ public class IntroFrame {
 		introFrame.setTitle("Arranjo da Linha de Transmiss\u00E3o");
 		introFrame.setBounds(100, 100, 700, 320);
 		introFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		introFrame.setLocationRelativeTo(null);
 
 		JButton btnAceitar = new JButton("Aceitar");
+		btnAceitar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				btnAceitar.setBackground(new Color(235, 235, 235));
+				btnAceitar.setBackground(new Color(58, 65, 84));
+			}
+		});
 		btnAceitar.setBounds(277, 234, 135, 25);
 		btnAceitar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

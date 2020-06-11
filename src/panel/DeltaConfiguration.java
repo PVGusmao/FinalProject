@@ -2,8 +2,12 @@ package panel;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Point;
+import java.awt.Toolkit;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -74,20 +78,6 @@ public class DeltaConfiguration extends JFrame {
 		});
 	}
 	
-	public static void main(String Args) {
-		 try {
-	            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-	                if ("Nimbus".equals(info.getName())) {
-	                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-	                    break;
-	                }
-	            }
-	        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-	        }
-		
-		 deltaFrame();
-	}
-
 	/**
 	 * Create the application.
 	 */
@@ -105,6 +95,11 @@ public class DeltaConfiguration extends JFrame {
 		deltaFrame.setBounds(100, 100, 781, 659);
 		deltaFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		deltaFrame.getContentPane().setLayout(null);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		Point middle = new Point(screenSize.width / 2, screenSize.height / 2);
+		Point newLocation = new Point(middle.x - (deltaFrame.getWidth() / 2), 
+		                              middle.y - (deltaFrame.getHeight() / 2));
+		deltaFrame.setLocation(newLocation);
 		
 		JLabel labelDistancia = new JLabel("Dist\u00E2ncia entre Condutores em metros");
 		labelDistancia.setFont(new Font("Times New Roman", Font.PLAIN, 14));
@@ -463,6 +458,8 @@ public class DeltaConfiguration extends JFrame {
 		JButton btnCarregar = new JButton("Carregar");
 		btnCarregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+			try {
 				JFileChooser chooser = new JFileChooser();
 				chooser.showOpenDialog(null);
 				File f = chooser.getSelectedFile();
@@ -511,8 +508,10 @@ public class DeltaConfiguration extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			}
-		});
+			} catch (Exception e1) {
+		}
+	}
+});
 		btnCarregar.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		btnCarregar.setBounds(478, 551, 134, 21);
 		deltaFrame.getContentPane().add(btnCarregar);
@@ -582,6 +581,8 @@ public class DeltaConfiguration extends JFrame {
 					mark = 5;
 				}
 				
+				try {
+					
 				StaticVariable.markSub = mark;
 				StaticVariable.h = Double.parseDouble(textFieldAltura.getText());
 				StaticVariable.s = Double.parseDouble(textFieldEspaçamento.getText());
@@ -600,7 +601,8 @@ public class DeltaConfiguration extends JFrame {
 				StaticVariable.rpr = Double.parseDouble(textFieldRaioParaRaio.getText());
 				
 				dg.setVisible(true);
-			
+				
+				} catch (Exception e1) {}
 			}	
 		});
 		btnGrafico.setFont(new Font("Times New Roman", Font.BOLD, 14));
