@@ -37,6 +37,9 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+import model.Calculos;
+import model.StaticVariable;
+
 public class VerticalConfiguration extends JFrame {
 
 	Calculos calc = new Calculos();
@@ -252,8 +255,8 @@ public class VerticalConfiguration extends JFrame {
 		            double iMatrix[] = calc.imaginaryVoltage(tension, 120, n, sub);
 		            double RealLoadMatrix[][] = calc.multiplyMatrix(invertedMatrix,  rMatrix, n, sub);
 		            double ImaginaryLoadMatrix[][] = calc.multiplyMatrix(invertedMatrix,  iMatrix, n, sub);
-		            double realAtGround = calc.groundFieldFormulaVertical(RealLoadMatrix,pointPtoA, pointPtoB, pointPtoC, h, n, s, sub);
-		            double imaginaryAtGround = calc.groundFieldFormulaVertical(ImaginaryLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub);
+		            double realAtGround = calc.groundFieldFormulaVertical(RealLoadMatrix,pointPtoA, pointPtoB, pointPtoC, h, n, s, sub, xP1, xP2, s, yP1, yP2);
+		            double imaginaryAtGround = calc.groundFieldFormulaVertical(ImaginaryLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub, xP1, xP2, s, yP1, yP2);
 		            double[] polarValue = calc.rectangularToPolar(realAtGround, imaginaryAtGround );
 		            
 		            String module = String.valueOf(polarValue[0]);
@@ -269,8 +272,8 @@ public class VerticalConfiguration extends JFrame {
 		            double iMatrix[] = calc.imaginaryVoltage(tension, 120, n, sub);
 		            double RealLoadMatrix[][] = calc.multiplyMatrix(invertedMatrix,  rMatrix, n, sub);
 		            double ImaginaryLoadMatrix[][] = calc.multiplyMatrix(invertedMatrix,  iMatrix, n, sub);
-		            double realAtGround = calc.groundFieldFormulaVertical(RealLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub);
-		            double imaginaryAtGround = calc.groundFieldFormulaVertical(ImaginaryLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub);
+		            double realAtGround = calc.groundFieldFormulaVertical(RealLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub, xP1, xP2, s, yP1, yP2);
+		            double imaginaryAtGround = calc.groundFieldFormulaVertical(ImaginaryLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub, xP1, xP2, s, yP1, yP2);
 		            double[] polarValue = calc.rectangularToPolar(realAtGround, imaginaryAtGround );
 		            
 		            String module = String.valueOf(polarValue[0]);
@@ -286,8 +289,8 @@ public class VerticalConfiguration extends JFrame {
 		            double iMatrix[] = calc.imaginaryVoltage(tension, 120, n, sub);
 		            double RealLoadMatrix[][] = calc.multiplyMatrix(invertedMatrix,  rMatrix, n, sub);
 		            double ImaginaryLoadMatrix[][] = calc.multiplyMatrix(invertedMatrix,  iMatrix, n, sub);
-		            double realAtGround = calc.groundFieldFormulaVertical(RealLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub);
-		            double imaginaryAtGround = calc.groundFieldFormulaVertical(ImaginaryLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub);
+		            double realAtGround = calc.groundFieldFormulaVertical(RealLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub, xP1, xP2, s, yP1, yP2);
+		            double imaginaryAtGround = calc.groundFieldFormulaVertical(ImaginaryLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub, xP1, xP2, s, yP1, yP2);
 		            double[] polarValue = calc.rectangularToPolar(realAtGround, imaginaryAtGround );
 		            
 		            String module = String.valueOf(polarValue[0]);
@@ -303,8 +306,8 @@ public class VerticalConfiguration extends JFrame {
 		            double iMatrix[] = calc.imaginaryVoltage(tension, 120, n, sub);
 		            double RealLoadMatrix[][] = calc.multiplyMatrix(invertedMatrix,  rMatrix, n, sub);
 		            double ImaginaryLoadMatrix[][] = calc.multiplyMatrix(invertedMatrix,  iMatrix, n, sub);
-		            double realAtGround = calc.groundFieldFormulaVertical(RealLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub);
-		            double imaginaryAtGround = calc.groundFieldFormulaVertical(ImaginaryLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub);
+		            double realAtGround = calc.groundFieldFormulaVertical(RealLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub, xP1, xP2, s, yP1, yP2);
+		            double imaginaryAtGround = calc.groundFieldFormulaVertical(ImaginaryLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub, xP1, xP2, s, yP1, yP2);
 		            double[] polarValue = calc.rectangularToPolar(realAtGround, imaginaryAtGround );
 		            
 		            String module = String.valueOf(polarValue[0]);
@@ -681,8 +684,8 @@ public class VerticalConfiguration extends JFrame {
 	            double iMatrix[] = calc.imaginaryVoltage(tension, 120, n, sub);
 	            double RealLoadMatrix[][] = calc.multiplyMatrix(invertedMatrix,  rMatrix, n, sub);
 	            double ImaginaryLoadMatrix[][] = calc.multiplyMatrix(invertedMatrix,  iMatrix, n, sub);
-	            double realAtGround = calc.groundFieldFormulaVertical(RealLoadMatrix,pointPtoA, pointPtoB, pointPtoC, h, n, s, sub);
-	            double imaginaryAtGround = calc.groundFieldFormulaVertical(ImaginaryLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub);
+	            double realAtGround = calc.groundFieldFormulaVertical(RealLoadMatrix,pointPtoA, pointPtoB, pointPtoC, h, n, s, sub, xP1, xP2, s, yP1, yP2);
+	            double imaginaryAtGround = calc.groundFieldFormulaVertical(ImaginaryLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub, xP1, xP2, s, yP1, yP2);
 	            double[] polarValue = calc.rectangularToPolar(realAtGround, imaginaryAtGround );
 	            value[i] = polarValue[0];
 	            
@@ -694,8 +697,8 @@ public class VerticalConfiguration extends JFrame {
 	            double iMatrix[] = calc.imaginaryVoltage(tension, 120, n, sub);
 	            double RealLoadMatrix[][] = calc.multiplyMatrix(invertedMatrix,  rMatrix, n, sub);
 	            double ImaginaryLoadMatrix[][] = calc.multiplyMatrix(invertedMatrix,  iMatrix, n, sub);
-	            double realAtGround = calc.groundFieldFormulaVertical(RealLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub);
-	            double imaginaryAtGround = calc.groundFieldFormulaVertical(ImaginaryLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub);
+	            double realAtGround = calc.groundFieldFormulaVertical(RealLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub, xP1, xP2, s, yP1, yP2);
+	            double imaginaryAtGround = calc.groundFieldFormulaVertical(ImaginaryLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub, xP1, xP2, s, yP1, yP2);
 	            double[] polarValue = calc.rectangularToPolar(realAtGround, imaginaryAtGround );
 	            value[i] = polarValue[0];
 	            
@@ -707,8 +710,8 @@ public class VerticalConfiguration extends JFrame {
 	            double iMatrix[] = calc.imaginaryVoltage(tension, 120, n, sub);
 	            double RealLoadMatrix[][] = calc.multiplyMatrix(invertedMatrix,  rMatrix, n, sub);
 	            double ImaginaryLoadMatrix[][] = calc.multiplyMatrix(invertedMatrix,  iMatrix, n, sub);
-	            double realAtGround = calc.groundFieldFormulaVertical(RealLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub);
-	            double imaginaryAtGround = calc.groundFieldFormulaVertical(ImaginaryLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub);
+	            double realAtGround = calc.groundFieldFormulaVertical(RealLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub, xP1, xP2, s, yP1, yP2);
+	            double imaginaryAtGround = calc.groundFieldFormulaVertical(ImaginaryLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub, xP1, xP2, s, yP1, yP2);
 	            double[] polarValue = calc.rectangularToPolar(realAtGround, imaginaryAtGround );
 	            value[i] = polarValue[0];
 	            
@@ -720,8 +723,8 @@ public class VerticalConfiguration extends JFrame {
 	            double iMatrix[] = calc.imaginaryVoltage(tension, 120, n, sub);
 	            double RealLoadMatrix[][] = calc.multiplyMatrix(invertedMatrix,  rMatrix, n, sub);
 	            double ImaginaryLoadMatrix[][] = calc.multiplyMatrix(invertedMatrix,  iMatrix, n, sub);
-	            double realAtGround = calc.groundFieldFormulaVertical(RealLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub);
-	            double imaginaryAtGround = calc.groundFieldFormulaVertical(ImaginaryLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub);
+	            double realAtGround = calc.groundFieldFormulaVertical(RealLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub, xP1, xP2, s, yP1, yP2);
+	            double imaginaryAtGround = calc.groundFieldFormulaVertical(ImaginaryLoadMatrix, pointPtoA, pointPtoB, pointPtoC, h, n, s, sub, xP1, xP2, s, yP1, yP2);
 	            double[] polarValue = calc.rectangularToPolar(realAtGround, imaginaryAtGround );
 	            value[i] = polarValue[0];
 	            
@@ -752,7 +755,7 @@ public class VerticalConfiguration extends JFrame {
 	    ChartPanel panel = new ChartPanel(chart);	
 	    XYPlot plot = chart.getXYPlot( );
 	    XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer( );
-	    renderer.setSeriesPaint( 0 , Color.magenta );
+	    renderer.setSeriesPaint( 0 , Color.RED );
 	    renderer.setSeriesStroke( 0 , new BasicStroke( 2.0f ) );
 	    plot.setRenderer( renderer ); 
 	    setContentPane(panel);	

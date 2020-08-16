@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JRadioButton;
+
+import model.StaticVariable;
+
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.ButtonGroup;

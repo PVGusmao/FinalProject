@@ -1,10 +1,10 @@
-package panel;
+package model;
 
 public class Conductor {
 
-	double x;
-	double y;
-	double r;
+	public double x;
+	public double y;
+	public double r;
 	
 	
 }

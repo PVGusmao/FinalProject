@@ -1,4 +1,4 @@
-package panel;
+package model;
 
 public class Calculos {
 
@@ -16,7 +16,7 @@ public class Calculos {
 	 
 	//--------> Criação dos condutores da configuração HORIZONTAL.
 	 
-	 public Conductor[] distribuiHorizontal (int n, int sub, double d, double h, double r, double s, double xP1, double yP1, double xP2, double yP2) {
+	 public Conductor[] distribuiHorizontal (int n, int sub, double d, double h, double r, double s, double xP1, double yP1, double xP2, double yP2, double rpr) {
 		
 		 Conductor condutor[] = new Conductor[n * sub +2];
  		 for (int i = 0; i<(n *sub+2); i++) {
@@ -50,9 +50,11 @@ public class Calculos {
 		 
 		 for (int m = (sub*n); m < (sub*n+2); m++) {
 			 if (m == (sub*n) ) {
-			 condutor[m].x = xP1;
-			 condutor[m].y = yP1;
+				 condutor[m].r = rpr;
+				 condutor[m].x = xP1;
+				 condutor[m].y = yP1;
 			 } else {
+				 condutor[m].r = rpr;
 				 condutor[m].x = xP2;
     			 condutor[m].y = yP2;
 			 }
@@ -65,7 +67,7 @@ public class Calculos {
 	 
 	//--------> Criação dos condutores da configuração DELTA.
 	 
-	 public Conductor[] distribuiDelta (int n, int sub, double d, double h, double r, double s, double xP1, double yP1, double xP2, double yP2, double t) {
+	 public Conductor[] distribuiDelta (int n, int sub, double d, double h, double r, double s, double xP1, double yP1, double xP2, double yP2, double t, double rpr) {
 			
 		 Conductor condutor[] = new Conductor[n * sub +2];
 		 for (int i = 0; i<(n *sub+2); i++) {
@@ -105,9 +107,11 @@ public class Calculos {
    	 }
 		 for (int m = (sub*n); m < (sub*n+2); m++) {
 			 if (m == (sub*n) ) {
+			 condutor[m].r = rpr;
 			 condutor[m].x = xP1;
 			 condutor[m].y = yP1;
 			 } else {
+				 condutor[m].r = rpr;
 				 condutor[m].x = xP2;
     			 condutor[m].y = yP2;
 			 }
@@ -119,7 +123,7 @@ public class Calculos {
 	 
 	//--------> Criação dos condutores da configuração VERTICAL.
 	 
-	 public Conductor[] distribuiVertical (int n, int sub, double d, double h, double r, double s, double xP1, double yP1, double xP2, double yP2, double t) {
+	 public Conductor[] distribuiVertical (int n, int sub, double d, double h, double r, double s, double xP1, double yP1, double xP2, double yP2, double t, double rpr) {
 	 		
 		 Conductor condutor[] = new Conductor[n * sub+2];
  		 for (int i = 0; i<(n *sub+2); i++) {
@@ -166,9 +170,11 @@ public class Calculos {
     	 }
 		 for (int m = (sub*n); m < (sub*n+2); m++) {
 			 if (m == (sub*n) ) {
+				 condutor[m].r = rpr;
 				 condutor[m].x = xP1;
 				 condutor[m].y = yP1;
 				 } else {
+					 condutor[m].r = rpr;
 					 condutor[m].x = xP2;
 	    			 condutor[m].y = yP2;
 				 }
@@ -183,14 +189,14 @@ public class Calculos {
 	 public double[][] createMatrixFlatCinco (double h, double r, double s, int n, double d, double t, int sub, double xP1, double yP1, double xP2, double yP2, double rpr) {
 	        double matrix[][] = new double[sub * n +2][sub * n +2];
 	           
-		Conductor condutor[] = distribuiHorizontal(n, sub, d, h, r, s, xP1, yP1, xP2, yP2);
+		Conductor condutor[] = distribuiHorizontal(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, rpr);
 		 
 	 	for (int i = 0; i<n*sub +2; i++) {
 	 		for (int j = 0; j<n*sub +2; j++) {
 	 			if (i == j && i < sub*n) {
 					matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/r);
 	 			} else if (i == j && i >=n*sub) {
-	 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/rpr); 
+	 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/condutor[j].r); 
 	 			} else {
 	 				double dxy = Math.sqrt(Math.pow((condutor[j].x - condutor[i].x), 2) + Math.pow(condutor[j].y - condutor[i].y, 2));
 	 				if (condutor[j].x == condutor[i].x) {
@@ -211,14 +217,14 @@ public class Calculos {
 	 public double[][] createMatrixFlatQuatro (double h, double r, double s, int n, double d, double t, int sub, double xP1, double yP1, double xP2, double yP2, double rpr) {
 	        double matrix[][] = new double[sub * n +2][sub * n +2];
 	           
-		Conductor condutor[] = distribuiHorizontal(n, sub, d, h, r, s, xP1, yP1, xP2, yP2);
+		Conductor condutor[] = distribuiHorizontal(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, rpr);
 		 
 	 	for (int i = 0; i<n*sub+2; i++) {
 	 		for (int j = 0; j<n*sub+2; j++) {
 	 			if (i == j && i < sub*n) {
 					matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/r);
 	 			} else if (i == j && i >=n*sub) {
-	 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/rpr); 
+	 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/condutor[j].r); 
 	 			} else {
 	 				double dxy = Math.sqrt(Math.pow((condutor[j].x - condutor[i].x), 2) + Math.pow(condutor[j].y - condutor[i].y, 2));
 	 				if (condutor[j].x == condutor[i].x) {
@@ -239,14 +245,14 @@ public class Calculos {
 	 public double[][] createMatrixFlatTres (double h, double r, double s, int n, double d, double t, int sub, double xP1, double yP1, double xP2, double yP2, double rpr) {
 	        double matrix[][] = new double[sub * n+2][sub * n+2];
 	           
-		Conductor condutor[] = distribuiHorizontal(n, sub, d, h, r, s, xP1, yP1, xP2, yP2);
+		Conductor condutor[] = distribuiHorizontal(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, rpr);
 		 
 	 	for (int i = 0; i<n*sub +2; i++) {
 	 		for (int j = 0; j<n*sub +2; j++) {
 	 			if (i == j && i < sub*n) {
 					matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/r);
 	 			} else if (i == j && i >=n*sub) {
-	 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/rpr); 
+	 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/condutor[j].r); 
 	 			} else {
 	 				double dxy = Math.sqrt(Math.pow((condutor[j].x - condutor[i].x), 2) + Math.pow(condutor[j].y - condutor[i].y, 2));
  					double parc1 = Math.pow(condutor[i].y + condutor[j].y, 2);
@@ -262,14 +268,14 @@ public class Calculos {
 	 public double[][] createMatrixFlatDois (double h, double r, double s, int n, double d, double t, int sub, double xP1, double yP1, double xP2, double yP2, double rpr) {
 	    double matrix[][] = new double[sub * n +2][sub * n +2];
 	           
-		Conductor condutor[] = distribuiHorizontal(n, sub, d, h, r, s, xP1, yP1, xP2, yP2);
+		Conductor condutor[] = distribuiHorizontal(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, rpr);
 		 
 	 	for (int i = 0; i<n*sub +2; i++) {
 	 		for (int j = 0; j<n*sub +2; j++) {
 	 			if (i == j && i < sub*n) {
 					matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/r);
 	 			} else if (i == j && i >=n*sub) {
-	 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/rpr); 
+	 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/condutor[j].r); 
 	 			} else {
 	 					double dxy = Math.sqrt(Math.pow((condutor[j].x - condutor[i].x), 2) + Math.pow(condutor[j].y - condutor[i].y, 2));
 	 					double distPontoImagem = Math.sqrt(Math.pow(2 * condutor[j].y, 2) + Math.pow(dxy, 2));
@@ -287,14 +293,14 @@ public class Calculos {
 	 public double[][] createMatrixDeltaCinco (double h, double r, double s, int n, double d, double t, int sub, double xP1, double yP1, double xP2, double yP2, double rpr) {
 	        double matrix[][] = new double[sub * n+2][sub * n+2];
 	           
-			Conductor condutor[] = distribuiDelta(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, t);
+			Conductor condutor[] = distribuiDelta(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, t, rpr);
 			 
 		 	for (int i = 0; i<n*sub+2; i++) {
 		 		for (int j = 0; j<n*sub+2; j++) {
 		 			if (i == j && i < sub*n) {
 						matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/r);
 		 			} else if (i == j && i >=n*sub) {
-		 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/rpr); 
+		 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/condutor[j].r); 
 		 			} else {
 		 				double dxy = Math.sqrt(Math.pow((condutor[j].x - condutor[i].x), 2) + Math.pow(condutor[j].y - condutor[i].y, 2));
 		 				if (condutor[j].x == condutor[i].x) {
@@ -315,14 +321,14 @@ public class Calculos {
 	 public double[][] createMatrixDeltaQuatro (double h, double r, double s, int n, double d, double t, int sub, double xP1, double yP1, double xP2, double yP2, double rpr) {
 	        double matrix[][] = new double[sub * n+2][sub * n+2];
 	           
-			Conductor condutor[] = distribuiDelta(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, t);
+			Conductor condutor[] = distribuiDelta(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, t, rpr);
 			 
 		 	for (int i = 0; i<n*sub+2; i++) {
 		 		for (int j = 0; j<n*sub+2; j++) {
 		 			if (i == j && i < sub*n) {
 						matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/r);
 		 			} else if (i == j && i >=n*sub) {
-		 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/rpr); 
+		 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/condutor[j].r); 
 		 			} else {
 		 				double dxy = Math.sqrt(Math.pow((condutor[j].x - condutor[i].x), 2) + Math.pow(condutor[j].y - condutor[i].y, 2));
 		 				if (condutor[j].x == condutor[i].x) {
@@ -343,14 +349,14 @@ public class Calculos {
 	 public double[][] createMatrixDeltaTres (double h, double r, double s, int n, double d, double t, int sub, double xP1, double yP1, double xP2, double yP2, double rpr) {
 	        double matrix[][] = new double[sub * n+2][sub * n+2];
 	           
-			Conductor condutor[] = distribuiDelta(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, t);
+			Conductor condutor[] = distribuiDelta(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, t, rpr);
 			 
 		 	for (int i = 0; i<n*sub+2; i++) {
 		 		for (int j = 0; j<n*sub+2; j++) {
 		 			if (i == j && i < sub*n) {
 						matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/r);
 		 			} else if (i == j && i >=n*sub) {
-		 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/rpr); 
+		 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/condutor[j].r); 
 		 			} else {
 		 				double dxy = Math.sqrt(Math.pow((condutor[j].x - condutor[i].x), 2) + Math.pow(condutor[j].y - condutor[i].y, 2));
 		 				
@@ -367,14 +373,14 @@ public class Calculos {
 	 public double[][] createMatrixDeltaDois (double h, double r, double s, int n, double d, double t, int sub, double xP1, double yP1, double xP2, double yP2, double rpr) {
      double matrix[][] = new double[sub * n+2][sub * n+2];
         
-		Conductor condutor[] = distribuiDelta(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, t);
+		Conductor condutor[] = distribuiDelta(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, t, rpr);
 		 
 	 	for (int i = 0; i<n*sub+2; i++) {
 	 		for (int j = 0; j<n*sub+2; j++) {
 	 			if (i == j && i < sub*n) {
 					matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/r);
 	 			} else if (i == j && i >=n*sub) {
-	 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/rpr); 
+	 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/condutor[j].r); 
 	 			} else {
 	 				double dxy = Math.sqrt(Math.pow((condutor[j].x - condutor[i].x), 2) + Math.pow(condutor[j].y - condutor[i].y, 2));
 					double distPontoImagem = Math.sqrt(Math.pow(2 * condutor[j].y, 2) + Math.pow(dxy, 2));
@@ -392,14 +398,14 @@ public class Calculos {
 	 public double[][] createMatrixVerticalCinco (double h, double r, double s, int n, double d, double t, int sub, double xP1, double yP1, double xP2, double yP2, double rpr) {
 		    double matrix[][] = new double[sub * n+2][sub * n+2];
 		           
-		    Conductor condutor[] = distribuiVertical(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, t);
+		    Conductor condutor[] = distribuiVertical(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, t, rpr);
 			 
 		 	for (int i = 0; i<n*sub+2; i++) {
 		 		for (int j = 0; j<n*sub+2; j++) {
 		 			if (i == j && i < sub*n) {
 						matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/r);
 		 			} else if (i == j && i >=n*sub) {
-		 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/rpr); 
+		 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/condutor[j].r); 
 		 			} else {
 			 			double dxy = Math.sqrt(Math.pow((condutor[j].x - condutor[i].x), 2) + Math.pow(condutor[j].y - condutor[i].y, 2));
 		 				if (condutor[j].x == condutor[i].x) {
@@ -420,14 +426,14 @@ public class Calculos {
 	 public double[][] createMatrixVerticalQuatro (double h, double r, double s, int n, double d, double t, int sub, double xP1, double yP1, double xP2, double yP2, double rpr) {
 		    double matrix[][] = new double[sub * n+2][sub * n+2];
 		           
-		    Conductor condutor[] = distribuiVertical(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, t);
+		    Conductor condutor[] = distribuiVertical(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, t, rpr);
 			 
 		 	for (int i = 0; i<n*sub+2; i++) {
 		 		for (int j = 0; j<n*sub+2; j++) {
 		 			if (i == j && i < sub*n) {
 						matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/r);
 		 			} else if (i == j && i >=n*sub) {
-		 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/rpr); 
+		 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/condutor[j].r); 
 		 			} else {
 		 			double dxy = Math.sqrt(Math.pow((condutor[j].x - condutor[i].x), 2) + Math.pow(condutor[j].y - condutor[i].y, 2));
 		 				if (condutor[j].x == condutor[i].x) {
@@ -448,14 +454,14 @@ public class Calculos {
 	 public double[][] createMatrixVerticalTres (double h, double r, double s, int n, double d, double t, int sub, double xP1, double yP1, double xP2, double yP2, double rpr) {
 		    double matrix[][] = new double[sub * n+2][sub * n+2];
 		           
-		    Conductor condutor[] = distribuiVertical(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, t);
+		    Conductor condutor[] = distribuiVertical(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, t, rpr);
 			 
 		 	for (int i = 0; i<n*sub+2; i++) {
 		 		for (int j = 0; j<n*sub+2; j++) {
 		 			if (i == j && i < sub*n) {
 						matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/r);
 		 			} else if (i == j && i >=n*sub) {
-		 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/rpr); 
+		 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/condutor[j].r); 
 		 			} else {
 		 				double dxy = Math.sqrt(Math.pow((condutor[j].x - condutor[i].x), 2) + Math.pow(condutor[j].y - condutor[i].y, 2));
 			 			double parc1 = Math.pow(condutor[i].y + condutor[j].y, 2);
@@ -472,14 +478,14 @@ public class Calculos {
 	 public double[][] createMatrixVerticalDois (double h, double r, double s, int n, double d, double t, int sub, double xP1, double yP1, double xP2, double yP2, double rpr) {
 	    double matrix[][] = new double[sub * n+2][sub * n+2];
 	           
-	    Conductor condutor[] = distribuiVertical(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, t);
+	    Conductor condutor[] = distribuiVertical(n, sub, d, h, r, s, xP1, yP1, xP2, yP2, t, rpr);
 		 
 	 	for (int i = 0; i<n*sub+2; i++) {
 	 		for (int j = 0; j<n*sub+2; j++) {
 	 			if (i == j && i < sub*n) {
 					matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/r);
 	 			} else if (i == j && i >=n*sub) {
-	 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/rpr); 
+	 				matrix[i][j] = epsilon * Math.log(Math.sqrt(Math.pow(2 * condutor[j].y, 2))/condutor[j].r); 
 	 			} else {
 	 					double dxy = Math.sqrt(Math.pow((condutor[j].x - condutor[i].x), 2) + Math.pow(condutor[j].y - condutor[i].y, 2));
 	 					double parc1 = Math.pow(condutor[i].y + condutor[j].y, 2);
@@ -492,7 +498,7 @@ public class Calculos {
 	 		return matrix;
 	 	}
 	 
-	//--------> Termino da criação da matriz para a formação DELTA.
+	//--------> Termino da criação da matriz para a formação VERTICAL.
 	 
 	 public double[][] invert(double a[][]) {
         int n = a.length;
@@ -683,7 +689,7 @@ public class Calculos {
     	}
     	int j = 0;
     	for(int i = 0; i < (sub * n +2); i++) {
-    		GroundValue += epsilon * 2 * ((a[i][j] * h)/(Math.pow(dh[i], 2) + Math.pow(h, 2)));
+    		GroundValue += epsilon * 2 * ((a[i][j] * h/(Math.pow(dh[i], 2) + Math.pow(h, 2))));
     	}
     	return GroundValue;
     }
@@ -721,24 +727,39 @@ public class Calculos {
 	 
 	//--------> Início Fórmula para o cálculo do campo elétrico ao nível do solo para configuração Vertical
 	 
-	 public double groundFieldFormulaVertical(double a[][], double dh1, double dh2,  double dh3, double h, int n, double dff, int sub) {
-	    	double GroundValue = 0;
+	 public double groundFieldFormulaVertical(double a[][], double dh1, double dh2,  double dh3, double h, int n, double dff, int sub, double xP1, double xP2, double s, double yP1, double yP2) {			 	
+		 	double GroundValue = 0;
 	    	double[] dh = new double [sub * n+2];
 	    	for (int c = 0; c <( sub * n+2); c++) {
-	    		if ( c < sub || c == (sub*n)) {
+	    		if ( c < sub ) {
 	    			dh[c] = dh1;
 	    		} else if (c >= sub && c < 2*sub) {
 	    			dh[c] = dh2;
-	    		} else if (c >=2*sub && c < n*sub || c == (sub*n+1)) {
+	    		} else if (c >=2*sub && c < n*sub ) {
 	    			dh[c] = dh3;
+	    		} else if (c == n*sub) {
+	    			dh[c] = xP1;
+	    		} else if (c == n*sub +1) {
+	    			dh[c] = xP2;
 	    		}
 	    	}
 	    	int j = 0;
 	    	for(int i = 0; i < (sub * n+2); i++) {
-	    		GroundValue += epsilon * 2 * ((a[i][j] * h)/(Math.pow(dh[i], 2) + Math.pow(h, 2)));
-	    	}
-	    	return GroundValue;
+	    		if (i < sub) {
+	    			GroundValue += epsilon * 2 * ((a[i][j] * h)/(Math.pow(dh[i], 2) + Math.pow(h, 2)));
+	    		} else if (i >=sub && i < 2*sub) {
+	    			GroundValue += epsilon * 2 * ((a[i][j] * (h + s))/(Math.pow(dh[i], 2) + Math.pow((h + s), 2)));	
+	    		} else if ( i >= 2*sub && i < 3*sub) {
+		    		GroundValue += epsilon * 2 * ((a[i][j] * (h + 2*s))/(Math.pow(dh[i], 2) + Math.pow((h + 2*s), 2)));
+	    		} else if (i == 3*sub) {
+	    			GroundValue += epsilon * 2 * ((a[i][j] * yP1)/(Math.pow(dh[i], 2) + Math.pow(yP1, 2)));
+	    		} else if (i == 3*sub+1) {
+	    			GroundValue += epsilon * 2 * ((a[i][j] * yP2)/(Math.pow(dh[i], 2) + Math.pow(yP2, 2)));
+	    		}
 	    }
+	    	return GroundValue;
+	    	
+	}
 	 
 	//--------> Termino do cálculo para o campo elétrico ao nível do solo para configuração VERTICAL.
 	 
@@ -761,6 +782,6 @@ public class Calculos {
 	        }
 	    }
 	 
-	 public double epsilon = 18 * Math.pow(10, 9);
+	 public static double epsilon = 18 * Math.pow(10, 9);
 
 }

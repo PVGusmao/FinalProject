@@ -7,6 +7,10 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import model.Calculos;
+import model.StaticVariable;
+
 import javax.swing.ImageIcon;
 import java.awt.Color;
 

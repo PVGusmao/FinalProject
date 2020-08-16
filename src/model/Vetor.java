@@ -1,9 +1,9 @@
-package panel;
+package model;
 
 public class Vetor {
 	
-		double x;
-		double y;
+		public double x;
+		public double y;
 	
 	}
 

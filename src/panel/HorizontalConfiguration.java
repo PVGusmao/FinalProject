@@ -35,6 +35,9 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+import model.Calculos;
+import model.StaticVariable;
+
 public class HorizontalConfiguration extends JFrame {
 	
 	Calculos calc = new Calculos();
